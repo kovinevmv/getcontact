@@ -20,7 +20,7 @@ class Cipher:
         self.cipher_aes = AES.new(codecs.decode(self.config.AES_KEY, 'hex'), AES.MODE_ECB)
 
     def pad_data(self, s):
-        return s + (self.BS - len(s) % self.BS) * chr(self.BS - len(s) % self.BS)
+        return bytes(s + (self.BS - len(s) % self.BS) * chr(self.BS - len(s) % self.BS), 'utf8')
 
     def unpad_data(self, s):
         return s[0:-ord(s[-1])]
