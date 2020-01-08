@@ -14,6 +14,6 @@ phone = args.phone
 getcontact = GetContactAPI()
 
 if args.json:
-    print(getcontact.get_info_dict(phone))
+    print(getcontact.get_information_by_phone(phone))
 else:
-    getcontact.get_info_console(phone)
+    getcontact.print_information_by_phone(phone)

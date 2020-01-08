@@ -12,7 +12,7 @@ class GetContactAPI:
         self.updater = UpdateConfig()
         self.requester = Requester(self.updater.get_config())
 
-    def get_phone_name(self, phoneNumber):
+    def get_name_by_phone(self, phoneNumber):
         response = self.requester.get_phone_name(phoneNumber)
         if response:
             name = response['result']['profile']['name']
@@ -52,7 +52,7 @@ class GetContactAPI:
                     "is_spam": False,
                     "remain_count": 0}
 
-    def get_phone_tags(self, phoneNumber):
+    def get_tags_by_phone(self, phoneNumber):
         response = self.requester.get_phone_tags(phoneNumber)
         if response:
             result = {"tags": [tag['tag'] for tag in response['result']['tags']]}
@@ -60,13 +60,13 @@ class GetContactAPI:
         else:
             return {"tags": []}
 
-    def get_info_dict(self, phone):
-        result_name = self.get_phone_name(phone)
-        result_tags = self.get_phone_tags(phone)
+    def get_information_by_phone(self, phone):
+        result_name = self.get_name_by_phone(phone)
+        result_tags = self.get_tags_by_phone(phone)
         return dict(**result_name, **result_tags)
 
-    def get_info_console(self, phone):
-        data = self.get_info_dict(phone)
+    def print_information_by_phone(self, phone):
+        data = self.get_information_by_phone(phone)
         self._print_beauty_output(data)
 
     def _print_beauty_output(self, data):
@@ -77,3 +77,16 @@ class GetContactAPI:
             for tag in data['tags']:
                 print("\t", tag)
         print("Remain count:", data['remain_count'])
+
+    def get_information_by_phone_list(self, phones):
+        return [self.get_information_by_phone(phone) for phone in phones]
+
+    def get_information_by_phone_list_file(self, file):
+        """
+            Return information about phones in file
+            Example input file:
+                +798005553535
+                +798005553536
+                +798005553537
+        """
+        pass
