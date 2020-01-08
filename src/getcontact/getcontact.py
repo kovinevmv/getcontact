@@ -36,21 +36,20 @@ class GetContactAPI:
                       "displayName": response['result']['profile']['displayName'],
                       "profileImage": response['result']['profile']['profileImage'],
                       "email": response['result']['profile']['email'],
-                      "is_spam": True if response['result']['spamInfo']["degree"] == "high" else False,
-                      "remain_count": response['result']['subscriptionInfo']['usage']['search']['remainingCount']}
+                      "is_spam": True if response['result']['spamInfo']["degree"] == "high" else False}
 
-            self.updater.update_remain_count_by_token(config.TOKEN, result['remain_count'])
+            remain_count = response['result']['subscriptionInfo']['usage']['search']['remainingCount']
+            self.updater.update_remain_count_by_token(config.TOKEN, remain_count)
             self.requester.update_config(self.updater.get_config())
             return result
         else:
-            return {"name": "",
+            return {"name": None,
                     "phoneNumber": phoneNumber,
                     "country": config.COUNTRY,
-                    "displayName": "",
-                    "profileImage": "",
-                    "email": "",
-                    "is_spam": False,
-                    "remain_count": 0}
+                    "displayName": "Not Found",
+                    "profileImage": None,
+                    "email": None,
+                    "is_spam": False}
 
     def get_tags_by_phone(self, phoneNumber):
         response = self.requester.get_phone_tags(phoneNumber)
@@ -76,4 +75,3 @@ class GetContactAPI:
             print('Tag list: ')
             for tag in data['tags']:
                 print("\t", tag)
-        print("Remain count:", data['remain_count'])
