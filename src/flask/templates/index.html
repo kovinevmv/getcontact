@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<title>Factorization</title>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.min.js"></script>
+<body style="background-color: #1A1A1D;">
+
+
+<div class=page>
+    <div class="w3-cell-row w3-center" style="background-color: #116466">
+        <div class="w3-container">
+            <h1 style="color: #FFCB9A">GetContact App</h1>
+            <label style="color: #FFCB9A" class="w3-left"><b>Enter value:</b></label>
+            <input id="phone" class="w3-input w3-border w3-light-grey" placeholder="Example: +79291045342">
+            <p></p>
+            <button id="button" class="w3-btn w3-blue-grey" type="submit">Find</button>
+            <script>
+                $('#button').click(() => {
+                    $('#container_res').hide(100);
+                    var x = $('#phone').val().replace(/[-() ]/g, "");
+                    $.getJSON( "/find?phone=" + x, function( data ) {
+                        $('#container_res').empty();
+
+                        $('#container_res').append("<h3>" + data.displayName + "</h3>");
+                        if (data.tags.length > 0){
+                            for (let tag of data.tags) {
+                                $('#container_res').append("<h3>" + tag + "</h3>");
+                            }
+                        }
+                        $('#container_res').show(200);
+                    });
+                });
+                $(function(){
+                  $("#phone").mask("+7(999) 999-99-99");
+                });
+            </script>
+            <p></p>
+        </div>
+        <div id="container_res" class="w3-panel w3-leftbar w3-border-blue w3-pale-blue" style="display: none">
+        </div>
+    </div>
+</div>
+
+
+
+
+</body>
