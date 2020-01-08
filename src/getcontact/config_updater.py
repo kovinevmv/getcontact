@@ -36,7 +36,7 @@ class UpdateConfig:
         for (user, values) in self.tokens_dict.items():
             values['IS_ACTIVE'] = values['REMAIN_COUNT'] > 0
         self.save_dict()
-        self.set_new_token(self.get_any_active())
+        self.set_new_token(self.get_active())
 
     def save_dict(self):
         self.write_yaml(self.tokens_dict)
@@ -47,6 +47,17 @@ class UpdateConfig:
     def get_any_active(self):
         tokens = self.get_all_active()
         return tokens[0] if tokens else {}
+
+    def get_new_active(self):
+        current_token = self.config.TOKEN
+        active = self.get_all_active()
+        for values in active:
+            if values['TOKEN'] != current_token:
+                return values
+
+    def get_active(self):
+        active = self.get_all_active()
+        return self.get_new_active() if len(active) >= 2 else self.get_any_active()
 
     def set_new_token(self, token):
         self.config.TOKEN = token['TOKEN']
