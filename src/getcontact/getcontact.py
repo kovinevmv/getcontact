@@ -77,16 +77,3 @@ class GetContactAPI:
             for tag in data['tags']:
                 print("\t", tag)
         print("Remain count:", data['remain_count'])
-
-    def get_information_by_phone_list(self, phones):
-        return [self.get_information_by_phone(phone) for phone in phones]
-
-    def get_information_by_phone_list_file(self, file):
-        """
-            Return information about phones in file
-            Example input file:
-                +798005553535
-                +798005553536
-                +798005553537
-        """
-        pass
