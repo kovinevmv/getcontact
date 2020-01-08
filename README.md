@@ -9,18 +9,17 @@ Open ` /data/data/app.source.getcontact/shared_prefs/GetContactSettingsPref.xml`
 
 ## How to run 
 
-1. Create and run venv
+- Create and run venv
 ```shell script
 [ ! -d venv ] && python3 -m venv venv; source venv/bin/activate
 ```
-2. Install requirements
+
+- Install requirements
 ```shell script
 pip3 install requirements.txt
 ```
 
-
-
-Console output
+- Console output
 ```shell script
 python3 ./src/main.py -p +79291045342
 ```
@@ -46,7 +45,7 @@ Tag list:
 Remain count: 194
 ```
 
-Console JSON-format output 
+- Console JSON-format output 
 ```shell script
 python3 ./src/main.py -j -p +79291045342
 ```
