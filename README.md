@@ -8,6 +8,7 @@ Open ` /data/data/app.source.getcontact/shared_prefs/GetContactSettingsPref.xml`
 
 
 ## How to run 
+### Python3
 
 - Create and run venv
 ```shell script
@@ -52,4 +53,12 @@ python3 ./src/main.py -j -p +79291045342
 Output:
 ```json5
 {'name': None, 'phoneNumber': '+79291045342', 'country': 'RU', 'displayName': 'Андрей Тимофеев', 'profileImage': None, 'email': None, 'is_spam': False, 'remain_count': 194, 'tags': ['Андрей Тимофеев', 'Андрей Спб', 'Андрей Челентос', 'Андрей Катин', 'Андрей', 'Онлрей', 'Экс Бойфренд Aka Реальный Долбоеб', 'Андрей Chelentos', 'Andrey Tymofeev', 'Андрей Тим', 'Андрюша :', 'Андрей 💑', '.andrey', 'Andrey']}
+```
+
+
+### Docker
+```shell script
+chmod +x ./run.sh
+sudo docker build . -t getcontact
+sudo docker run -t getcontact -p +79291045342
 ```
