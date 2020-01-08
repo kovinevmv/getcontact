@@ -16,7 +16,7 @@ Open ` /data/data/app.source.getcontact/shared_prefs/GetContactSettingsPref.xml`
 
 - Install requirements
 ```shell script
-pip3 install requirements.txt
+pip3 install -r requirements.txt
 ```
 
 - Console output
