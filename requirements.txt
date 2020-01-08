@@ -1,7 +1,6 @@
 certifi==2019.11.28
 chardet==3.0.4
 idna==2.8
-pkg-resources==0.0.0
 pycryptodome==3.9.4
 PyYAML==5.3
 requests==2.22.0
