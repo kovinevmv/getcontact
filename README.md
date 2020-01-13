@@ -1,6 +1,8 @@
 ## How to get keys
 
-Open ` /data/data/app.source.getcontact/shared_prefs/GetContactSettingsPref.xml` 
+Requirements: Android with ROOT-rights.
+
+Open in filemanager of phone ` /data/data/app.source.getcontact/shared_prefs/GetContactSettingsPref.xml` 
 
 * AES key: `FINAL_KEY`
 * token: `TOKEN`
