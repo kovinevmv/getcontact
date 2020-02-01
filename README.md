@@ -1,4 +1,13 @@
+## About
+
+This project allows you to get some information about person by his phone number. 
+
+
+After decompiling the application [GetContact](https://www.getcontact.com/ru/), I created simple API to get information directly without installing this application. Unfortunately, the application sends your contacts from the smartphone notebook to public database, but this problem does not occur using this script :)
+
 ## How to get keys
+
+If script doens't run properly try to update token\`s inforamation in `dump/tokens.yaml` file. Or to if you want to run with Premium Account enter your data in this file. 
 
 Requirements: Android with ROOT-rights.
 
