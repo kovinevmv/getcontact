@@ -7,7 +7,7 @@ After decompiling the application [GetContact](https://www.getcontact.com/ru/), 
 
 ## How to get keys
 
-If script doens't run properly try to update token\`s inforamation in `dump/tokens.yaml` file. Or to if you want to run with Premium Account enter your data in this file. 
+If script doens't run properly try to update token\`s inforamation in `dump/tokens.yaml` file. Or if you want to run with Premium Account enter your auth data in this file. 
 
 Requirements: Android with ROOT-rights.
 
