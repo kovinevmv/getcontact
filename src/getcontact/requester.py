@@ -36,8 +36,6 @@ class Requester:
                              "source": "",
                              "token": config.TOKEN}
 
-
-
     def update_config(self, config):
         self.cipher.update_config(config)
         self.set_dict()
@@ -67,7 +65,18 @@ class Requester:
         if response.status_code == 201:
             return True, response.json()
         else:
-            #print(response.text, "error")
+            response = response.json()['data']
+            response = json.loads(self.cipher.decrypt_AES_b64(response))
+            errorCode = response['meta']['errorCode']
+
+            #print(response)
+
+            if errorCode == '403004':
+                from getcontact.decode_captcha import CaptchaDecode
+                c = CaptchaDecode()
+                code, path = c.decode_response(response)
+                self.decode_captcha(code)
+
             return False, []
 
     def send_req_to_the_server(self, url, payload, no_encryption=False):
@@ -84,13 +93,21 @@ class Requester:
             return response
 
     def get_phone_name(self, phoneNumber):
+        self.update_config(config)
         method = "search"
         self.request_data["source"] = self.methods[method]
         self.request_data["phoneNumber"] = phoneNumber
         return self.send_req_to_the_server(self.base_url + self.base_uri_api + method, self.request_data)
 
     def get_phone_tags(self, phoneNumber):
+        self.update_config(config)
         method = "number-detail"
         self.request_data["source"] = self.methods[method]
         self.request_data["phoneNumber"] = phoneNumber
         return self.send_req_to_the_server(self.base_url + self.base_uri_api + method, self.request_data)
+
+    def decode_captcha(self, code):
+        self.update_config(config)
+        captcha_data = {"token": config.TOKEN,
+                        "validationCode": code}
+        return self.send_req_to_the_server(self.base_url + self.base_uri_api + 'verify-code', captcha_data)

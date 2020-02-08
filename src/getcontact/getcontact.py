@@ -40,7 +40,7 @@ class GetContactAPI:
 
             remain_count = response['result']['subscriptionInfo']['usage']['search']['remainingCount']
             self.updater.update_remain_count_by_token(config.TOKEN, remain_count)
-            self.requester.update_config(self.updater.get_config())
+
             return result
         else:
             return {"name": None,
@@ -59,9 +59,20 @@ class GetContactAPI:
         else:
             return {"tags": []}
 
+    def update_config(self):
+        self.requester.update_config(self.updater.get_config())
+
+    def get_name_by_phone_with_change_token(self, phone):
+        result = self.get_name_by_phone(phone)
+        self.update_config()
+        return result
+
     def get_information_by_phone(self, phone):
         result_name = self.get_name_by_phone(phone)
         result_tags = self.get_tags_by_phone(phone)
+
+        self.update_config()
+
         return dict(**result_name, **result_tags)
 
     def print_information_by_phone(self, phone):
