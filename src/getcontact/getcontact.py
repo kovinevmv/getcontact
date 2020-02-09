@@ -79,6 +79,11 @@ class GetContactAPI:
         data = self.get_information_by_phone(phone)
         self._print_beauty_output(data)
 
+    def get_from_file(self, file):
+        phones = open(file, 'r').read().split('\n')
+        for phone in phones:
+            self.print_information_by_phone(phone)
+
     def _print_beauty_output(self, data):
         print("Phone:", data['phoneNumber'])
         print("User:", data['displayName'])
