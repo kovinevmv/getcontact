@@ -65,6 +65,7 @@ class Requester:
         if response.status_code == 201:
             return True, response.json()
         else:
+
             response = response.json()['data']
             response = json.loads(self.cipher.decrypt_AES_b64(response))
             errorCode = response['meta']['errorCode']
@@ -76,8 +77,9 @@ class Requester:
                 c = CaptchaDecode()
                 code, path = c.decode_response(response)
                 self.decode_captcha(code)
+                return False, {'repeat': True}
 
-            return False, []
+            return False, {}
 
     def send_req_to_the_server(self, url, payload, no_encryption=False):
         payload = self.prepare_payload(payload)
@@ -89,10 +91,23 @@ class Requester:
 
         if is_ok:
             return json.loads(self.cipher.decrypt_AES_b64(response))
+        elif not is_ok and 'repeat' in response.keys() and response['repeat']:
+            return self.repeat_last_task()
         else:
             return response
 
+    def repeat_last_task(self):
+        function = self.current_task['function']
+        phone = self.current_task['phone']
+
+        if function == 'get_phone_name':
+            return self.get_phone_name(phone)
+        elif function == 'get_phone_tags':
+            return self.get_phone_tags(phone)
+
     def get_phone_name(self, phoneNumber):
+        self.current_task = {'function': 'get_phone_name',
+                             'phone': phoneNumber}
         self.update_config(config)
         method = "search"
         self.request_data["source"] = self.methods[method]
@@ -100,6 +115,9 @@ class Requester:
         return self.send_req_to_the_server(self.base_url + self.base_uri_api + method, self.request_data)
 
     def get_phone_tags(self, phoneNumber):
+        self.current_task = {'function': 'get_phone_tags',
+                             'phone': phoneNumber}
+
         self.update_config(config)
         method = "number-detail"
         self.request_data["source"] = self.methods[method]
