@@ -19,6 +19,9 @@ Open in filemanager of phone ` /data/data/app.source.getcontact/shared_prefs/Get
 
 
 ## How to run 
+
+Install [tesseract](https://github.com/tesseract-ocr/tesseract/wiki)
+
 ### Python3
 
 - Create and run venv
