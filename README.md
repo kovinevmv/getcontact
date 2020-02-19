@@ -17,10 +17,18 @@ Open in filemanager of phone ` /data/data/app.source.getcontact/shared_prefs/Get
 * token: `TOKEN`
 * exp: `PRIVATE_KEY`
 
+Edit `dump/tokens.yaml` with your data by:
+- `AES_KEY`: AES key from `GetContactSettingsPref.xml` 
+- `ANDROID_OS`: For example `android 5.0`
+- `DEVICE_ID`: For example `14130e29cebe9c39`
+- `IS_ACTIVE`: `true` if your token is valid
+- `PRIVATE_KEY`: exp from `GetContactSettingsPref.xml`
+- `REMAIN_COUNT`: Any natural num if your token is valid
+- `TOKEN`: token from `GetContactSettingsPref.xml`
 
 ## How to run 
 
-Install [tesseract](https://github.com/tesseract-ocr/tesseract/wiki)
+Install [tesseract](https://github.com/tesseract-ocr/tesseract/wiki) to bypass captcha
 
 ### Python3
 
