@@ -46,7 +46,11 @@ class UpdateConfig:
 
     def get_any_active(self):
         tokens = self.get_all_active()
-        return tokens[0] if tokens else {}
+        if tokens:
+            return tokens[0]
+        else:
+            print("[-] No valid token detected. Please")
+            return {}
 
     def get_new_active(self):
         current_token = self.config.TOKEN
