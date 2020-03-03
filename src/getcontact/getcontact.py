@@ -69,7 +69,7 @@ class GetContactAPI:
 
     def get_information_by_phone(self, phone):
         result_name = self.get_name_by_phone(phone)
-        result_tags = self.get_tags_by_phone(phone)
+        result_tags = {}#self.get_tags_by_phone(phone)
 
         self.update_config()
 
@@ -87,7 +87,7 @@ class GetContactAPI:
     def _print_beauty_output(self, data):
         print("Phone:", data['phoneNumber'])
         print("User:", data['displayName'])
-        if data['tags']:
+        if 'tags' in data.keys() and data['tags']:
             print('Tag list: ')
             for tag in data['tags']:
                 print("\t", tag)

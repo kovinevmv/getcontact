@@ -1,5 +1,6 @@
 import base64
 import random
+import re
 import string
 
 import numpy as np
@@ -11,6 +12,7 @@ class CaptchaDecode:
     def __init__(self):
         pass
 
+    @staticmethod
     def decode_response(self, response):
         image_b64 = response['result']['image']
         image_data = self.decode_b64(image_b64)
@@ -18,6 +20,7 @@ class CaptchaDecode:
         self.write_data_image(image_data, path)
         return self.decrypt(path), path
 
+    @staticmethod
     def decode_path(self, path):
         return self.decrypt(path)
 
@@ -34,9 +37,12 @@ class CaptchaDecode:
     def decode_b64(data):
         return base64.b64decode(data)
 
-    def decrypt(self, path):
+    @staticmethod
+    def decrypt(path):
         frame = cv2.imread(path)
         hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
 
         mask = cv2.inRange(hsv, np.array([30, 120, 0]), np.array([255, 255, 255]))
-        return pytesseract.image_to_string(mask)
+        text = pytesseract.image_to_string(mask)
+        text = re.sub("[^A-Za-z0-9]", '', text)
+        return text
