@@ -68,5 +68,5 @@ def get_info(phone):
     return format(data)
 
 
-phone = '+79107357420'
+phone = '+78123354000'
 print(get_info(phone))

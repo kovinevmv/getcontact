@@ -65,19 +65,20 @@ class Requester:
         if response.status_code == 201:
             return True, response.json()
         else:
-
             response = response.json()['data']
             response = json.loads(self.cipher.decrypt_AES_b64(response))
             errorCode = response['meta']['errorCode']
 
-            #print(response)
-
             if errorCode == '403004':
+                print('Captcha is detected. ')
                 from getcontact.decode_captcha import CaptchaDecode
                 c = CaptchaDecode()
                 code, path = c.decode_response(response)
                 self.decode_captcha(code)
+
                 return False, {'repeat': True}
+            if errorCode == '404001':
+                print('No information about phone in database')
 
             return False, {}
 
@@ -90,6 +91,7 @@ class Requester:
             is_ok, response = self.send_request_encrypted(url, payload)
 
         if is_ok:
+            #print(json.loads(self.cipher.decrypt_AES_b64(response)))
             return json.loads(self.cipher.decrypt_AES_b64(response))
         elif not is_ok and 'repeat' in response.keys() and response['repeat']:
             return self.repeat_last_task()
