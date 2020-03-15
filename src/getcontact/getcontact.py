@@ -69,7 +69,7 @@ class GetContactAPI:
 
     def get_information_by_phone(self, phone):
         result_name = self.get_name_by_phone(phone)
-        result_tags = {}#self.get_tags_by_phone(phone)
+        result_tags = self.get_tags_by_phone(phone)
 
         self.update_config()
 
