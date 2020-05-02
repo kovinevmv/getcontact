@@ -90,4 +90,4 @@ class GetContactAPI:
         if 'tags' in data.keys() and data['tags']:
             print('Tag list: ')
             for tag in data['tags']:
-                print("\t", tag)
+                print("\t", tag.encode('utf-8', errors='replace').decode('utf-8', errors='replace'))
