@@ -1,9 +1,11 @@
 [![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/kovinevmv/getcontact.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/kovinevmv/getcontact/context:python)
 
+## Warning 
+
+This project is not intended for downloading getkontakt database. This project provides the opportunity to receive information by phone number **with a limited number of requests for one token per month**. Several examples of tokens are posted in the repository.
+**If the script does not work, use your tokens.**
+
 ## About
-
-This project allows you to get some information about person by his phone number. 
-
 
 After decompiling the application [GetContact](https://www.getcontact.com/ru/), I created simple API to get information directly without installing this application. Unfortunately, the application sends your contacts from the smartphone notebook to public database, but this problem does not occur using this script :)
 
