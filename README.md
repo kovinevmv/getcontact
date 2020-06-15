@@ -2,7 +2,7 @@
 
 ## Warning 
 
-This project is not intended for downloading getkontakt database. This project provides the opportunity to receive information by phone number **with a limited number of requests for one token per month**. Several examples of tokens are posted in the repository.
+This project is not intended for downloading GetContact database. This project provides the opportunity to receive information by phone number **with a limited number of requests for one token per month**. Several examples of tokens are posted in the repository.
 **If the script does not work, use your tokens.**
 
 ## About
