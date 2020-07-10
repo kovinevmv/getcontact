@@ -12,7 +12,6 @@ class CaptchaDecode:
     def __init__(self):
         pass
 
-    @staticmethod
     def decode_response(self, response):
         image_b64 = response['result']['image']
         image_data = self.decode_b64(image_b64)
