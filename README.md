@@ -13,7 +13,7 @@ After decompiling the application [GetContact](https://www.getcontact.com/ru/), 
 
 If script doens't run properly try to update token\`s inforamation in `dump/tokens.yaml` file. Or if you want to run with Premium Account enter your auth data in this file. 
 
-Requirements: Android with ROOT-rights.
+Requirements: Android with ROOT-rights (or emulator).
 
 Open in filemanager of phone ` /data/data/app.source.getcontact/shared_prefs/GetContactSettingsPref.xml` 
 
