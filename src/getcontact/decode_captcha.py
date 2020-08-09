@@ -13,7 +13,7 @@ class CaptchaDecode:
         pass
 
     def decode_response(self, response):
-        image_b64 = response['result']['image']
+        image_b64 = response["result"]["image"]
         image_data = self.decode_b64(image_b64)
         path = self.generate_random_name()
         self.write_data_image(image_data, path)
@@ -25,11 +25,15 @@ class CaptchaDecode:
 
     @staticmethod
     def generate_random_name():
-        return 'captcha/' + ''.join([random.choice(string.ascii_letters) for _ in range(10)]) + '.jpg'
+        return (
+            "captcha/"
+            + "".join([random.choice(string.ascii_letters) for _ in range(10)])
+            + ".jpg"
+        )
 
     @staticmethod
     def write_data_image(data, path):
-        with open(path, 'wb') as f:
+        with open(path, "wb") as f:
             f.write(data)
 
     @staticmethod
@@ -43,5 +47,5 @@ class CaptchaDecode:
 
         mask = cv2.inRange(hsv, np.array([30, 120, 0]), np.array([255, 255, 255]))
         text = pytesseract.image_to_string(mask)
-        text = re.sub("[^A-Za-z0-9]", '', text)
+        text = re.sub("[^A-Za-z0-9]", "", text)
         return text
