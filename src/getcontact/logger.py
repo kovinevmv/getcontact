@@ -8,6 +8,6 @@ class Log:
             print(datetime.now().strftime('[%Y-%m-%d %H:%M:%S]'), ' '.join([str(arg) for arg in args]))
 
     @staticmethod
-    def error(message):
+    def error(*args):
         if config.VERBOSE:
-            print(datetime.now().strftime('[%Y-%m-%d %H:%M:%S]'), 'error', message)
+            print(datetime.now().strftime('[%Y-%m-%d %H:%M:%S]'), 'error', ' '.join([str(arg) for arg in args]))

@@ -2,6 +2,7 @@ import yaml
 import os
 
 from getcontact.config import config
+from getcontact.logger import Log
 
 
 class UpdateConfig:
@@ -49,7 +50,7 @@ class UpdateConfig:
         if tokens:
             return tokens[0]
         else:
-            print("[-] No valid token detected. Please")
+            Log.error("No valid token detected. Script will crash")
             return {}
 
     def get_new_active(self):
@@ -64,10 +65,11 @@ class UpdateConfig:
         return self.get_new_active() if len(active) >= 2 else self.get_any_active()
 
     def set_new_token(self, token):
-        self.config.TOKEN = token['TOKEN']
-        self.config.AES_KEY = token['AES_KEY']
-        self.config.ANDROID_OS = token['ANDROID_OS']
-        self.config.DEVICE_ID = token['DEVICE_ID']
+        if 'TOKEN' in token:
+            self.config.TOKEN = token['TOKEN']
+            self.config.AES_KEY = token['AES_KEY']
+            self.config.ANDROID_OS = token['ANDROID_OS']
+            self.config.DEVICE_ID = token['DEVICE_ID']
 
     def get_config(self):
         return self.config

@@ -21,8 +21,8 @@ class Config:
     """
 
     # Will be changed using dump/tokens.yaml data
-    TOKEN = ''
-    AES_KEY = ''
+    TOKEN = 'hphofd5757307f5dbffce25ae9ef4bd54dc56e770bc763215e7dc4f02e3'
+    AES_KEY = '764fe50cdb21a07c4c049377754c2f50f127febb3aa67e03c7334f414e0fa7db'
     PRIVATE_KEY = 1  # exp
 
     # May need to be changed

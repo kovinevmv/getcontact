@@ -5,12 +5,14 @@ import requests
 from getcontact.cipher import Cipher
 from getcontact.config import config
 from getcontact.logger import Log
+from getcontact.config_updater import UpdateConfig
 
 
 class Requester:
     def __init__(self, config_=None):
         current_config = config_ if config_ else config
         self.cipher = Cipher(current_config)
+        self.updater = UpdateConfig()
         self.update_timestamp()
         self.set_dict()
 
@@ -90,6 +92,10 @@ class Requester:
                     return False, {'repeat': True}
                 if errorCode == '404001':
                     print('No information about phone in database')
+                if errorCode == '403021':
+                    # Token dead
+                    Log.d('Token is dead.', config.TOKEN)
+                    self.updater.update_remain_count_by_token(config.TOKEN, 0)
             else:
                 Log.d('Unhandled error with response', response)
                 Log.d('Try to use correct token')
