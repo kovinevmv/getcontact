@@ -84,18 +84,18 @@ Output:
 
 #### Debug mode
 ```shell script
-python3 ./src/main.py -v -p +79291045342
+python3 ./src/main.py -v -p +79992295926
 ```
 Output:
 ```
-[2020-08-09 21:19:30] Call print_information_by_phone with phone  +79992295925
-[2020-08-09 21:19:30] Call get_information_by_phone with phone  +79992295925
-[2020-08-09 21:19:30] Call get_name_by_phone with phoneNumber  +79992295925
+[2020-08-09 21:19:30] Call print_information_by_phone with phone  +79992295926
+[2020-08-09 21:19:30] Call get_information_by_phone with phone  +79992295926
+[2020-08-09 21:19:30] Call get_name_by_phone with phoneNumber  +79992295926
 [2020-08-09 21:19:30] Call _send_post with url: https://pbssrv-centralevents.com/v2.5/search data: {"data": "IntagsrX4IGrPHP7pfJfl9jBqULuZK25pFdPYdCGjSEovlUiPr9rdM/O1rcOcW6WPKUONujPcQKWBlEVzv5R6sFelyff9c5su48kI6fqBZpjVGohthrvzOKtuCC0Tne9N1v30b0PL4HKQrmWPlik8kGCSqajsivlJ01a+e9ELkXk/AjaHrm9cZVxyCfZpx4D"}
 ...
 'Try premium free', 'subsInfoButtonIntroText': 'Try Getcontact Premium now to increase tag view limit and enjoy other Premium Benefits.'}}}
 [2020-08-09 21:19:31] Call _print_beauty_output with data  {'name': None, 'phoneNumber': '+79992295925', 'country': 'RU', 'displayName': 'Not Found', 'profileImage': None, 'email': None, 'is_spam': False, 'tags': []}
-Phone: +79291045342
+Phone: +79992295926
 User: Not Found
 ```
 
