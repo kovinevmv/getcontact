@@ -2,6 +2,8 @@ from getcontact.config import config
 from getcontact.config_updater import UpdateConfig
 from getcontact.requester import Requester
 
+from getcontact.logger import Log
+
 
 def parse_none(data):
     return '' if data is None else data
@@ -13,6 +15,7 @@ class GetContactAPI:
         self.requester = Requester(self.updater.get_config())
 
     def get_name_by_phone(self, phoneNumber):
+        Log.d('Call get_name_by_phone with phoneNumber ', phoneNumber)
         response = self.requester.get_phone_name(phoneNumber)
         if response:
             name = response['result']['profile']['name']
@@ -52,6 +55,7 @@ class GetContactAPI:
                     "is_spam": False}
 
     def get_tags_by_phone(self, phoneNumber):
+        Log.d('Call get_tags_by_phone with phoneNumber ', phoneNumber)
         response = self.requester.get_phone_tags(phoneNumber)
         if response:
             result = {"tags": [tag['tag'] for tag in response['result']['tags']]}
@@ -63,11 +67,13 @@ class GetContactAPI:
         self.requester.update_config(self.updater.get_config())
 
     def get_name_by_phone_with_change_token(self, phone):
+        Log.d('Call get_name_by_phone_with_change_token with phone ', phone)
         result = self.get_name_by_phone(phone)
         self.update_config()
         return result
 
     def get_information_by_phone(self, phone):
+        Log.d('Call get_information_by_phone with phone ', phone)
         result_name = self.get_name_by_phone(phone)
         result_tags = self.get_tags_by_phone(phone)
 
@@ -76,15 +82,18 @@ class GetContactAPI:
         return dict(**result_name, **result_tags)
 
     def print_information_by_phone(self, phone):
+        Log.d('Call print_information_by_phone with phone ', phone)
         data = self.get_information_by_phone(phone)
         self._print_beauty_output(data)
 
     def get_from_file(self, file):
+        Log.d('Call get_from_file with file ', file)
         phones = open(file, 'r').read().split('\n')
         for phone in phones:
             self.print_information_by_phone(phone)
 
     def _print_beauty_output(self, data):
+        Log.d('Call _print_beauty_output with data ', data)
         print("Phone:", data['phoneNumber'])
         print("User:", data['displayName'])
         if 'tags' in data.keys() and data['tags']:

@@ -4,6 +4,7 @@ import requests
 
 from getcontact.cipher import Cipher
 from getcontact.config import config
+from getcontact.logger import Log
 
 
 class Requester:
@@ -47,6 +48,7 @@ class Requester:
         return json.dumps(data).replace(" ", "").replace("~", " ")
 
     def _send_post(self, url, data):
+        Log.d('Call _send_post with url:', url, 'data:', data)
         response = requests.post(url, data=data, headers=self.headers)
         self.update_timestamp()
         return self._parse_response(response)
@@ -60,26 +62,37 @@ class Requester:
         return self._send_post(url, data)
 
     def _parse_response(self, response):
+        Log.d('Call _parse_response with response:', response.text)
+
         if response.status_code == 200:
             return True, response.json()["data"]
         if response.status_code == 201:
             return True, response.json()
         else:
-            response = response.json()['data']
-            response = json.loads(self.cipher.decrypt_AES_b64(response))
-            errorCode = response['meta']['errorCode']
+            Log.d('Not correct answer from server.')
+            response = response.json()
+            if 'data' in response.keys():
+                response = response['data']
+                Log.d('Response: ', response)
 
-            if errorCode == '403004':
-                print('Captcha is detected. ')
-                from getcontact.decode_captcha import CaptchaDecode
-                c = CaptchaDecode()
-                code, path = c.decode_response(response)
-                self.decode_captcha(code)
+                response = json.loads(self.cipher.decrypt_AES_b64(response))
+                Log.d('Response decrypted: ', response)
 
-                return False, {'repeat': True}
-            if errorCode == '404001':
-                print('No information about phone in database')
+                errorCode = response['meta']['errorCode']
 
+                if errorCode == '403004':
+                    print('Captcha is detected. ')
+                    from getcontact.decode_captcha import CaptchaDecode
+                    c = CaptchaDecode()
+                    code, path = c.decode_response(response)
+                    self.decode_captcha(code)
+
+                    return False, {'repeat': True}
+                if errorCode == '404001':
+                    print('No information about phone in database')
+            else:
+                Log.d('Unhandled error with response', response)
+                Log.d('Try to use correct token')
             return False, {}
 
     def send_req_to_the_server(self, url, payload, no_encryption=False):
