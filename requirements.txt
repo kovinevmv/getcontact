@@ -4,7 +4,7 @@ crypto==1.4.1
 idna==2.8
 Naked==0.1.31
 Pillow==7.1.0
-pycryptodome==3.9.6
+pycryptodome==3.9.9
 pytesseract==0.3.2
 PyYAML==5.3
 requests==2.22.0
