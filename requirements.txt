@@ -7,6 +7,6 @@ Pillow==7.1.0
 pycryptodome==3.9.9
 pytesseract==0.3.2
 PyYAML==5.3
-requests==2.22.0
+requests==2.25.0
 shellescape==3.8.1
 urllib3==1.26.1
