@@ -1,4 +1,4 @@
-certifi==2020.11.8
+certifi==2020.12.5
 chardet==3.0.4
 crypto==1.4.1
 idna==2.8
