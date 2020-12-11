@@ -26,9 +26,9 @@ class CaptchaDecode:
     @staticmethod
     def generate_random_name():
         return (
-                "captcha/"
-                + "".join([random.choice(string.ascii_letters) for _ in range(10)])
-                + ".jpg"
+            "captcha/"
+            + "".join([random.choice(string.ascii_letters) for _ in range(10)])
+            + ".jpg"
         )
 
     @staticmethod
@@ -46,8 +46,11 @@ class CaptchaDecode:
             frame = cv2.imread(path)
             hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
 
-            mask = cv2.inRange(hsv, np.array([30, 120, 0]), np.array([255, 255, 255]))
-            text = pytesseract.image_to_string(mask, config=f'--psm 8 tessedit_char_whitelist={string.ascii_letters + string.digits}')
+            mask = cv2.inRange(hsv, np.array(
+                [30, 120, 0]), np.array([255, 255, 255]))
+            text = pytesseract.image_to_string(
+                mask,
+                config=f'--psm 8 tessedit_char_whitelist={string.ascii_letters + string.digits}')
             text = re.sub("[^A-Za-z0-9]", "", text)
         except Exception as e:
             print(e)

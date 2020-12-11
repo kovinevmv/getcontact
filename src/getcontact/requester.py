@@ -139,7 +139,9 @@ class Requester:
             return self.get_phone_tags(phone)
 
     def get_phone_name(self, phoneNumber):
-        self.current_task = {"function": "get_phone_name", "phone": phoneNumber}
+        self.current_task = {
+            "function": "get_phone_name",
+            "phone": phoneNumber}
         self.update_config(config)
         method = "search"
         self.request_data["source"] = self.methods[method]
@@ -149,7 +151,9 @@ class Requester:
         )
 
     def get_phone_tags(self, phoneNumber):
-        self.current_task = {"function": "get_phone_tags", "phone": phoneNumber}
+        self.current_task = {
+            "function": "get_phone_tags",
+            "phone": phoneNumber}
 
         self.update_config(config)
         method = "number-detail"

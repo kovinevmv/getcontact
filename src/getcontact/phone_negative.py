@@ -20,7 +20,8 @@ def extract_text(data):
     if categories:
         for category in categories:
             info = category.findAll("li", {"class": "active"}, text=True)
-            tags_categories.extend([re.sub(r"\d+x ", "", i.text) for i in info])
+            tags_categories.extend(
+                [re.sub(r"\d+x ", "", i.text) for i in info])
 
     tags_ratings = []
     if ratings:
@@ -62,7 +63,8 @@ def format(data):
 
 
 def get_info(phone):
-    response = requests.get(f"https://www.neberitrubku.ru/nomer-telefona/{phone}")
+    response = requests.get(
+        f"https://www.neberitrubku.ru/nomer-telefona/{phone}")
     data = parse_page(response.text)
     data = extract_text(data)
     return format(data)

@@ -48,7 +48,8 @@ class GetContactAPI:
             remain_count = response["result"]["subscriptionInfo"]["usage"]["search"][
                 "remainingCount"
             ]
-            self.updater.update_remain_count_by_token(config.TOKEN, remain_count)
+            self.updater.update_remain_count_by_token(
+                config.TOKEN, remain_count)
 
             return result
         else:
@@ -66,7 +67,8 @@ class GetContactAPI:
         Log.d("Call get_tags_by_phone with phoneNumber ", phoneNumber)
         response = self.requester.get_phone_tags(phoneNumber)
         if response:
-            result = {"tags": [tag["tag"] for tag in response["result"]["tags"]]}
+            result = {"tags": [tag["tag"]
+                               for tag in response["result"]["tags"]]}
             return result
         else:
             return {"tags": []}
