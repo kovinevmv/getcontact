@@ -39,9 +39,7 @@ class GetContactAPI:
                 "displayName": response["result"]["profile"]["displayName"],
                 "profileImage": response["result"]["profile"]["profileImage"],
                 "email": response["result"]["profile"]["email"],
-                "is_spam": True
-                if response["result"]["spamInfo"]["degree"] == "high"
-                else False,
+                "is_spam": response["result"]["spamInfo"]["degree"] == "high",
             }
 
             remain_count = response["result"]["subscriptionInfo"]["usage"]["search"][
