@@ -124,7 +124,7 @@ class Requester:
         if is_ok:
             # print(json.loads(self.cipher.decrypt_AES_b64(response)))
             return json.loads(self.cipher.decrypt_AES_b64(response))
-        elif not is_ok and "repeat" in response.keys() and response["repeat"]:
+        if not is_ok and "repeat" in response.keys() and response["repeat"]:
             return self.repeat_last_task()
 
         return response
@@ -135,7 +135,7 @@ class Requester:
 
         if function == "get_phone_name":
             return self.get_phone_name(phone)
-        elif function == "get_phone_tags":
+        if function == "get_phone_tags":
             return self.get_phone_tags(phone)
 
         Log.error("Incorrect task for repeat")
