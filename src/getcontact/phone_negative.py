@@ -70,5 +70,3 @@ def get_info(phone):
     return convert(data)
 
 
-phone = "+78123354000"
-print(get_info(phone))

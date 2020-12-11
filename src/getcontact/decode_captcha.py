@@ -3,9 +3,9 @@ import random
 import re
 import string
 
+import cv2
 import numpy as np
 import pytesseract
-import cv2
 
 
 class CaptchaDecode:
