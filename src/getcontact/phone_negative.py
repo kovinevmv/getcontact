@@ -46,15 +46,15 @@ def extract_text(data):
 
 def is_spam(data):
     rating = data["rating"]
-    is_spam = False
+    is_spam_ = False
     if rating:
         count, status = rating.split(" ")
         if "отрицател" in status and int(count[:-1]) > 10:
-            is_spam = True
-    return is_spam
+            is_spam_ = True
+    return is_spam_
 
 
-def format(data):
+def convert(data):
     is_spam_ = is_spam(data)
     rating = data["rating"]
     data["rating"] = rating.split(" ")[1] if rating else rating
@@ -67,7 +67,7 @@ def get_info(phone):
         f"https://www.neberitrubku.ru/nomer-telefona/{phone}")
     data = parse_page(response.text)
     data = extract_text(data)
-    return format(data)
+    return convert(data)
 
 
 phone = "+78123354000"

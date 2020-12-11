@@ -55,9 +55,9 @@ class UpdateConfig:
         tokens = self.get_all_active()
         if tokens:
             return tokens[0]
-        else:
-            Log.error("No valid token detected. Script will crash")
-            return {}
+
+        Log.error("No valid token detected. Script will crash")
+        return {}
 
     def get_new_active(self):
         current_token = self.config.TOKEN
