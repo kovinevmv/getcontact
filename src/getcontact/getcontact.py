@@ -97,7 +97,8 @@ class GetContactAPI:
 
     def get_from_file(self, file):
         Log.d("Call get_from_file with file ", file)
-        phones = open(file, "r").read().split("\n")
+        with open(file, "r") as f:
+            phones = f.read().split("\n")
         for phone in phones:
             self.print_information_by_phone(phone)
 

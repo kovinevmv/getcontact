@@ -45,8 +45,8 @@ class Requester:
             "token": config.TOKEN,
         }
 
-    def update_config(self, config):
-        self.cipher.update_config(config)
+    def update_config(self, config_):
+        self.cipher.update_config(config_)
         self.set_dict()
 
     def update_timestamp(self):

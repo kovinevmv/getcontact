@@ -68,5 +68,3 @@ def get_info(phone):
     data = parse_page(response.text)
     data = extract_text(data)
     return convert(data)
-
-
