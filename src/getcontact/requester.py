@@ -97,6 +97,7 @@ class Requester:
                     c = CaptchaDecode()
                     code, path = c.decode_response(response)
                     self.decode_captcha(code)
+                    print('Try to decode: ', code)
 
                     return False, {"repeat": True}
                 if errorCode == "404001":
