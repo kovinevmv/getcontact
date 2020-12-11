@@ -20,7 +20,8 @@ def extract_text(data):
     if categories:
         for category in categories:
             info = category.findAll("li", {"class": "active"}, text=True)
-            tags_categories.extend([re.sub(r"\d+x ", "", i.text) for i in info])
+            tags_categories.extend(
+                [re.sub(r"\d+x ", "", i.text) for i in info])
 
     tags_ratings = []
     if ratings:
@@ -45,15 +46,15 @@ def extract_text(data):
 
 def is_spam(data):
     rating = data["rating"]
-    is_spam = False
+    is_spam_ = False
     if rating:
         count, status = rating.split(" ")
         if "отрицател" in status and int(count[:-1]) > 10:
-            is_spam = True
-    return is_spam
+            is_spam_ = True
+    return is_spam_
 
 
-def format(data):
+def convert(data):
     is_spam_ = is_spam(data)
     rating = data["rating"]
     data["rating"] = rating.split(" ")[1] if rating else rating
@@ -62,11 +63,10 @@ def format(data):
 
 
 def get_info(phone):
-    response = requests.get(f"https://www.neberitrubku.ru/nomer-telefona/{phone}")
+    response = requests.get(
+        f"https://www.neberitrubku.ru/nomer-telefona/{phone}")
     data = parse_page(response.text)
     data = extract_text(data)
-    return format(data)
+    return convert(data)
 
 
-phone = "+78123354000"
-print(get_info(phone))

@@ -9,8 +9,9 @@ class UpdateConfig:
     def __init__(self):
         self.config = config
         self.tokens_file = (
-            os.path.dirname(os.path.abspath(__file__)) + "/../../dump/tokens.yaml"
-        )
+            os.path.dirname(
+                os.path.abspath(__file__)) +
+            "/../../dump/tokens.yaml")
         self.tokens_dict = self.read_yaml()
         self.update_status()
 
@@ -46,16 +47,17 @@ class UpdateConfig:
 
     def get_all_active(self):
         return list(
-            filter(lambda x: x["IS_ACTIVE"], [i[1] for i in self.tokens_dict.items()])
-        )
+            filter(
+                lambda x: x["IS_ACTIVE"], [
+                    i[1] for i in self.tokens_dict.items()]))
 
     def get_any_active(self):
         tokens = self.get_all_active()
         if tokens:
             return tokens[0]
-        else:
-            Log.error("No valid token detected. Script will crash")
-            return {}
+
+        Log.error("No valid token detected. Script will crash")
+        return {}
 
     def get_new_active(self):
         current_token = self.config.TOKEN

@@ -1,8 +1,7 @@
 from getcontact.config import config
 from getcontact.config_updater import UpdateConfig
-from getcontact.requester import Requester
-
 from getcontact.logger import Log
+from getcontact.requester import Requester
 
 
 def parse_none(data):
@@ -48,28 +47,30 @@ class GetContactAPI:
             remain_count = response["result"]["subscriptionInfo"]["usage"]["search"][
                 "remainingCount"
             ]
-            self.updater.update_remain_count_by_token(config.TOKEN, remain_count)
+            self.updater.update_remain_count_by_token(
+                config.TOKEN, remain_count)
 
             return result
-        else:
-            return {
-                "name": None,
-                "phoneNumber": phoneNumber,
-                "country": config.COUNTRY,
-                "displayName": "Not Found",
-                "profileImage": None,
-                "email": None,
-                "is_spam": False,
-            }
+
+        return {
+            "name": None,
+            "phoneNumber": phoneNumber,
+            "country": config.COUNTRY,
+            "displayName": "Not Found",
+            "profileImage": None,
+            "email": None,
+            "is_spam": False,
+        }
 
     def get_tags_by_phone(self, phoneNumber):
         Log.d("Call get_tags_by_phone with phoneNumber ", phoneNumber)
         response = self.requester.get_phone_tags(phoneNumber)
         if response:
-            result = {"tags": [tag["tag"] for tag in response["result"]["tags"]]}
+            result = {"tags": [tag["tag"]
+                               for tag in response["result"]["tags"]]}
             return result
-        else:
-            return {"tags": []}
+
+        return {"tags": []}
 
     def update_config(self):
         self.requester.update_config(self.updater.get_config())

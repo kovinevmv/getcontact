@@ -1,11 +1,11 @@
 import json
 import time
-import requests
 
+import requests
 from getcontact.cipher import Cipher
 from getcontact.config import config
-from getcontact.logger import Log
 from getcontact.config_updater import UpdateConfig
+from getcontact.logger import Log
 
 
 class Requester:
@@ -78,38 +78,38 @@ class Requester:
             return True, response.json()["data"]
         if response.status_code == 201:
             return True, response.json()
+
+        Log.d("Not correct answer from server.")
+        response = response.json()
+        if "data" in response.keys():
+            response = response["data"]
+            Log.d("Response: ", response)
+
+            response = json.loads(self.cipher.decrypt_AES_b64(response))
+            Log.d("Response decrypted: ", response)
+
+            errorCode = response["meta"]["errorCode"]
+
+            if errorCode == "403004":
+                print("Captcha is detected. ")
+                from getcontact.decode_captcha import CaptchaDecode
+
+                c = CaptchaDecode()
+                code, path = c.decode_response(response)
+                self.decode_captcha(code)
+                print('Try to decode:', code, path)
+
+                return False, {"repeat": True}
+            if errorCode == "404001":
+                print("No information about phone in database")
+            if errorCode == "403021":
+                # Token dead
+                Log.d("Token is dead.", config.TOKEN)
+                self.updater.update_remain_count_by_token(config.TOKEN, 0)
         else:
-            Log.d("Not correct answer from server.")
-            response = response.json()
-            if "data" in response.keys():
-                response = response["data"]
-                Log.d("Response: ", response)
-
-                response = json.loads(self.cipher.decrypt_AES_b64(response))
-                Log.d("Response decrypted: ", response)
-
-                errorCode = response["meta"]["errorCode"]
-
-                if errorCode == "403004":
-                    print("Captcha is detected. ")
-                    from getcontact.decode_captcha import CaptchaDecode
-
-                    c = CaptchaDecode()
-                    code, path = c.decode_response(response)
-                    self.decode_captcha(code)
-                    print('Try to decode: ', code)
-
-                    return False, {"repeat": True}
-                if errorCode == "404001":
-                    print("No information about phone in database")
-                if errorCode == "403021":
-                    # Token dead
-                    Log.d("Token is dead.", config.TOKEN)
-                    self.updater.update_remain_count_by_token(config.TOKEN, 0)
-            else:
-                Log.d("Unhandled error with response", response)
-                Log.d("Try to use correct token")
-            return False, {}
+            Log.d("Unhandled error with response", response)
+            Log.d("Try to use correct token")
+        return False, {}
 
     def send_req_to_the_server(self, url, payload, no_encryption=False):
         payload = self.prepare_payload(payload)
@@ -126,8 +126,8 @@ class Requester:
             return json.loads(self.cipher.decrypt_AES_b64(response))
         elif not is_ok and "repeat" in response.keys() and response["repeat"]:
             return self.repeat_last_task()
-        else:
-            return response
+
+        return response
 
     def repeat_last_task(self):
         function = self.current_task["function"]
@@ -138,8 +138,13 @@ class Requester:
         elif function == "get_phone_tags":
             return self.get_phone_tags(phone)
 
+        Log.error("Incorrect task for repeat")
+        return None
+
     def get_phone_name(self, phoneNumber):
-        self.current_task = {"function": "get_phone_name", "phone": phoneNumber}
+        self.current_task = {
+            "function": "get_phone_name",
+            "phone": phoneNumber}
         self.update_config(config)
         method = "search"
         self.request_data["source"] = self.methods[method]
@@ -149,7 +154,9 @@ class Requester:
         )
 
     def get_phone_tags(self, phoneNumber):
-        self.current_task = {"function": "get_phone_tags", "phone": phoneNumber}
+        self.current_task = {
+            "function": "get_phone_tags",
+            "phone": phoneNumber}
 
         self.update_config(config)
         method = "number-detail"
