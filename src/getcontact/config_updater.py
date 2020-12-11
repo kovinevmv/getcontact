@@ -25,19 +25,19 @@ class UpdateConfig:
             f.write(yaml.dump(data, default_flow_style=False))
 
     def update_remain_count_by_token(self, token, remain_count):
-        for (user, values) in self.tokens_dict.items():
+        for values in self.tokens_dict.values():
             if values["TOKEN"] == token:
                 values["REMAIN_COUNT"] = remain_count
         self.update_status()
 
     def decrease_remain_count_by_token(self, token):
-        for (user, values) in self.tokens_dict.items():
+        for values in self.tokens_dict.values():
             if values["TOKEN"] == token:
                 values["REMAIN_COUNT"] -= 1
         self.update_status()
 
     def update_status(self):
-        for (user, values) in self.tokens_dict.items():
+        for values in self.tokens_dict.values():
             values["IS_ACTIVE"] = values["REMAIN_COUNT"] > 0
         self.save_dict()
         self.set_new_token(self.get_active())
@@ -65,6 +65,7 @@ class UpdateConfig:
         for values in active:
             if values["TOKEN"] != current_token:
                 return values
+        return None
 
     def get_active(self):
         active = self.get_all_active()
