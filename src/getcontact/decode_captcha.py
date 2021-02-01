@@ -9,9 +9,6 @@ import pytesseract
 
 
 class CaptchaDecode:
-    def __init__(self):
-        pass
-
     def decode_response(self, response):
         image_b64 = response["result"]["image"]
         image_data = self.decode_b64(image_b64)
@@ -48,8 +45,7 @@ class CaptchaDecode:
                                np.array([255, 255, 255]))
             text = pytesseract.image_to_string(
                 mask,
-                config=
-                f'--psm 8 tessedit_char_whitelist={string.ascii_letters + string.digits}'
+                config=f'--psm 8 tessedit_char_whitelist={string.ascii_letters + string.digits}'
             )
             text = re.sub("[^A-Za-z0-9]", "", text)
         except Exception as e:

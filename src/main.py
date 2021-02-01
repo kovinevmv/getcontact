@@ -3,7 +3,7 @@ import argparse
 from getcontact.getcontact import GetContactAPI
 from getcontact.config import config
 
-description = "Get infomation about phone number from databases of GetContact App"
+description = "Get information about phone number from databases of GetContact App"
 
 parser = argparse.ArgumentParser(description=description,
                                  formatter_class=argparse.RawTextHelpFormatter)
