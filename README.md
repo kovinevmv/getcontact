@@ -1,6 +1,10 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/433da7bd8f1f4eddaf339aeb30989e18)](https://app.codacy.com/manual/kovinevmv/getcontact?utm_source=github.com&utm_medium=referral&utm_content=kovinevmv/getcontact&utm_campaign=Badge_Grade_Dashboard)
 [![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/kovinevmv/getcontact.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/kovinevmv/getcontact/context:python)
 
+## Update [01.02.2021]
+
+- Captcha now working in GetContact App, therefore my scripts doesn't pass verification too :( Please, use another tokens
+
 ## Warning 
 
 This project is not intended for downloading GetContact database. This project provides the opportunity to receive information by phone number **with a limited number of requests for one token per month**. Several examples of tokens are posted in the repository.
@@ -20,7 +24,6 @@ Open in filemanager of phone ` /data/data/app.source.getcontact/shared_prefs/Get
 
   * AES key: `FINAL_KEY`
   * token: `TOKEN`
-  * exp: `PRIVATE_KEY`
 
 Edit `dump/tokens.yaml` with your data by:
   * `AES_KEY`: AES key from `GetContactSettingsPref.xml` 
