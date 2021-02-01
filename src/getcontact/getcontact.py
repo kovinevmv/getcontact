@@ -42,11 +42,10 @@ class GetContactAPI:
                 "is_spam": response["result"]["spamInfo"]["degree"] == "high",
             }
 
-            remain_count = response["result"]["subscriptionInfo"]["usage"]["search"][
-                "remainingCount"
-            ]
-            self.updater.update_remain_count_by_token(
-                config.TOKEN, remain_count)
+            remain_count = response["result"]["subscriptionInfo"]["usage"][
+                "search"]["remainingCount"]
+            self.updater.update_remain_count_by_token(config.TOKEN,
+                                                      remain_count)
 
             return result
 
@@ -64,8 +63,9 @@ class GetContactAPI:
         Log.d("Call get_tags_by_phone with phoneNumber ", phoneNumber)
         response = self.requester.get_phone_tags(phoneNumber)
         if response:
-            result = {"tags": [tag["tag"]
-                               for tag in response["result"]["tags"]]}
+            result = {
+                "tags": [tag["tag"] for tag in response["result"]["tags"]]
+            }
             return result
 
         return {"tags": []}
@@ -109,7 +109,7 @@ class GetContactAPI:
             for tag in data["tags"]:
                 print(
                     "\t",
-                    tag.encode("utf-8", errors="replace").decode(
-                        "utf-8", errors="replace"
-                    ),
+                    tag.encode("utf-8",
+                               errors="replace").decode("utf-8",
+                                                        errors="replace"),
                 )
