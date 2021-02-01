@@ -29,10 +29,6 @@ class Cipher:
     def unpad_data(self, s):
         return s[0: -ord(s[-1])]
 
-    def calculate_new_aes_key_by_server(self, server_key):
-        key = int(server_key) ** self.config.PRIVATE_KEY % self.config.MOD_EXP
-        new_key = hashlib.sha256(bytearray(str(key), "utf-8")).hexdigest()
-        return str(new_key)
 
     def create_signature(self, payload, timestamp):
         message = bytes(

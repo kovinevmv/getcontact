@@ -27,7 +27,6 @@ Edit `dump/tokens.yaml` with your data by:
   * `ANDROID_OS`: For example `android 5.0`
   * `DEVICE_ID`: For example `14130e29cebe9c39`
   * `IS_ACTIVE`: `true` if your token is valid
-  * `PRIVATE_KEY`: exp from `GetContactSettingsPref.xml`
   * `REMAIN_COUNT`: Any natural num if your token is valid
   * `TOKEN`: token from `GetContactSettingsPref.xml`
 

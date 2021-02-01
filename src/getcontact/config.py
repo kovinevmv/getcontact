@@ -1,6 +1,6 @@
 class Config:
     """
-    Change TOKEN, AES_KEY, PRIVATE_KEY to your in tokens.yaml.
+    Change TOKEN, AES_KEY to your in tokens.yaml.
     Find it in /data/data/app.source.getcontact/shared_prefs/GetContactSettingsPref.xml
     Required ROOT on your device.
 
@@ -10,7 +10,6 @@ class Config:
 
     * TOKEN: TOKEN
     * AES_KEY: FINAL_KEY
-    * PRIVATE_KEY: PRIVATE_KEY
     * APP_VERSION: version of installed GetContact apk.
     * API_VERSION: API version of current app, can be found in intercepted packets
     * ANDROID_OS: version of your Android OS, can be found in intercepted packets
@@ -21,15 +20,14 @@ class Config:
     """
 
     # Will be changed using dump/tokens.yaml data
-    TOKEN = "hphofd5757307f5dbffce25ae9ef4bd54dc56e770bc763215e7dc4f02e3"
-    AES_KEY = "764fe50cdb21a07c4c049377754c2f50f127febb3aa67e03c7334f414e0fa7db"
-    PRIVATE_KEY = 1  # exp
+    TOKEN = "rJrKc01a26b9a013ff3a35f6753820971f63c3f9f8571c8012e3c9633ba"
+    AES_KEY = "dd074ed6e8c64bc65cabdfdca052f16b187e5cbbc501e22d98dae2f9899fe543"
 
     # May need to be changed
     APP_VERSION = "4.9.1"
-    API_VERSION = "v2.5"
-    ANDROID_OS = "android 5.0"
-    DEVICE_ID = "8edbe110a4079829"
+    API_VERSION = "v2.8"
+    ANDROID_OS = "android 6.0"
+    DEVICE_ID = "8edbe110a4079830"
 
     # Default values
     COUNTRY = "RU"
