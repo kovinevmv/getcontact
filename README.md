@@ -3,7 +3,7 @@
 
 ## Update [01.02.2021]
 
-- Captcha now working in GetContact App, therefore my scripts doesn't pass verification too :( Please, use another tokens
+- Captcha not working in GetContact App, therefore my scripts doesn't pass verification too :( Please, use another tokens
 
 ## Warning 
 
