@@ -6,4 +6,4 @@ pycryptodome==3.9.6
 numpy~=1.19.4
 bs4~=0.0.1
 beautifulsoup4~=4.9.3
-opencv-python~=4.4.0.46
+opencv-python~=4.5.2.54
