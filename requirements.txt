@@ -3,7 +3,7 @@ pytesseract==0.3.2
 PyYAML==5.3
 requests~=2.24.0
 pycryptodome==3.9.6
-numpy~=1.19.4
+numpy~=1.21.0
 bs4~=0.0.1
 beautifulsoup4~=4.9.3
 opencv-python~=4.4.0.46
