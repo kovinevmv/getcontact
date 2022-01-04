@@ -1,6 +1,10 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/433da7bd8f1f4eddaf339aeb30989e18)](https://app.codacy.com/manual/kovinevmv/getcontact?utm_source=github.com&utm_medium=referral&utm_content=kovinevmv/getcontact&utm_campaign=Badge_Grade_Dashboard)
 [![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/kovinevmv/getcontact.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/kovinevmv/getcontact/context:python)
 
+## Update [01.01.2022]
+
+- GetContact changed API, therefore **project is not working**. Maybe in future will be fixed
+
 ## Update [01.02.2021]
 
 - Captcha not working in GetContact App, therefore my scripts doesn't pass verification too :( Please, use another tokens
