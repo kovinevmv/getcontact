@@ -34,7 +34,7 @@ class Cipher:
         secret = bytes(self.config.HMAC_KEY, "utf8")
         signature = self.encode_b64(
             hmac.new(secret, msg=message, digestmod=hashlib.sha256).digest())
-        return signature
+        return signature.decode()
 
     def format_message_to_hmac(self, msg, timestamp):
         return f"{timestamp}-{msg}"
