@@ -64,7 +64,8 @@ class Requester:
     def send_request_encrypted(self, url, data):
         self.headers["X-Encrypted"] = "1"
         return self._send_post(
-            url, json.dumps({"data": self.cipher.encrypt_AES_b64(data)}))
+            url, json.dumps({"data": self.cipher.encrypt_AES_b64(data)})
+        )
 
     def send_request_no_encrypted(self, url, data):
         self.headers["X-Encrypted"] = "0"
@@ -96,7 +97,7 @@ class Requester:
                 c = CaptchaDecode()
                 code, path = c.decode_response(response)
                 self.decode_captcha(code)
-                print('Try to decode:', code, path)
+                print("Try to decode:", code, path)
 
                 return False, {"repeat": True}
             if errorCode == "404001":
@@ -113,7 +114,8 @@ class Requester:
     def send_req_to_the_server(self, url, payload, no_encryption=False):
         payload = self.prepare_payload(payload)
         self.headers["X-Req-Signature"] = self.cipher.create_signature(
-            payload, self.timestamp)
+            payload, self.timestamp
+        )
         if no_encryption:
             is_ok, response = self.send_request_no_encrypted(url, payload)
         else:
@@ -140,32 +142,29 @@ class Requester:
         return None
 
     def get_phone_name(self, phoneNumber):
-        self.current_task = {
-            "function": "get_phone_name",
-            "phone": phoneNumber
-        }
+        self.current_task = {"function": "get_phone_name", "phone": phoneNumber}
         self.update_config(config)
         method = "search"
         self.request_data["source"] = self.methods[method]
         self.request_data["phoneNumber"] = phoneNumber
         return self.send_req_to_the_server(
-            self.base_url + self.base_uri_api + method, self.request_data)
+            self.base_url + self.base_uri_api + method, self.request_data
+        )
 
     def get_phone_tags(self, phoneNumber):
-        self.current_task = {
-            "function": "get_phone_tags",
-            "phone": phoneNumber
-        }
+        self.current_task = {"function": "get_phone_tags", "phone": phoneNumber}
 
         self.update_config(config)
         method = "number-detail"
         self.request_data["source"] = self.methods[method]
         self.request_data["phoneNumber"] = phoneNumber
         return self.send_req_to_the_server(
-            self.base_url + self.base_uri_api + method, self.request_data)
+            self.base_url + self.base_uri_api + method, self.request_data
+        )
 
     def decode_captcha(self, code):
         self.update_config(config)
         captcha_data = {"token": config.TOKEN, "validationCode": code}
         return self.send_req_to_the_server(
-            self.base_url + self.base_uri_api + "verify-code", captcha_data)
+            self.base_url + self.base_uri_api + "verify-code", captcha_data
+        )

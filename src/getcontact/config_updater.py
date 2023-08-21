@@ -8,8 +8,9 @@ from getcontact.logger import Log
 class UpdateConfig:
     def __init__(self):
         self.config = config
-        self.tokens_file = (os.path.dirname(os.path.abspath(__file__)) +
-                            "/../../dump/tokens.yaml")
+        self.tokens_file = (
+            os.path.dirname(os.path.abspath(__file__)) + "/../../dump/tokens.yaml"
+        )
         self.tokens_dict = self.read_yaml()
         self.update_status()
 
@@ -45,8 +46,8 @@ class UpdateConfig:
 
     def get_all_active(self):
         return list(
-            filter(lambda x: x["IS_ACTIVE"],
-                   [i[1] for i in self.tokens_dict.items()]))
+            filter(lambda x: x["IS_ACTIVE"], [i[1] for i in self.tokens_dict.items()])
+        )
 
     def get_any_active(self):
         tokens = self.get_all_active()
@@ -66,8 +67,7 @@ class UpdateConfig:
 
     def get_active(self):
         active = self.get_all_active()
-        return self.get_new_active(
-        ) if len(active) >= 2 else self.get_any_active()
+        return self.get_new_active() if len(active) >= 2 else self.get_any_active()
 
     def set_new_token(self, token):
         if "TOKEN" in token:
