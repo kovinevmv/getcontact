@@ -109,3 +109,9 @@ chmod +x ./run.sh
 sudo docker build . -t getcontact
 sudo docker run -t getcontact -p +792910453XX
 ```
+
+### Donate for coffee
+
+| Boosty |
+| ------------- |
+| <a href="https://boosty.to/kovinevmv/donate"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/Boosty_logo.svg/2560px-Boosty_logo.svg.png" width="200" /></a> | 
