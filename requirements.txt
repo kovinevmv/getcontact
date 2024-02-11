@@ -1,6 +1,6 @@
 crypto==1.4.1
 pytesseract==0.3.2
-PyYAML==5.3
+PyYAML==5.4
 requests~=2.24.0
 pycryptodome==3.9.6
 numpy~=1.19.4
